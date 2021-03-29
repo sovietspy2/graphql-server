@@ -5,13 +5,14 @@ schema {
 
 type Query{
     # Fetch All Users
-    getAllUsers:[User]
-
+    getAllUsers:[User],
+    findUserByName(name:String): User
 }
 
 type Mutation {
     # Update the user address
     updateUserAddress(userId:Int,address:String): User
+    createUser(firstName:String,lastName:String, dob:String, address:String, postId:Int): User
 }
 
 type User {
