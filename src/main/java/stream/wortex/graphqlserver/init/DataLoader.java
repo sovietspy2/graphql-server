@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.threads.ThreadPoolExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stream.wortex.graphqlserver.CommentPublisher;
 import stream.wortex.graphqlserver.model.Comment;
 import stream.wortex.graphqlserver.model.User;
 import stream.wortex.graphqlserver.repository.CommentRepository;
@@ -29,10 +30,15 @@ public class DataLoader {
 
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
+    @Autowired
+    private CommentPublisher commentPublisher;
+
     private void addNewComments() {
         try {
+            Comment comment = new Comment(faker.number().randomDigit(), faker.number().numberBetween(100, 200), faker.number().randomDigit(), faker.lebowski().quote());
             //log.info("Adding comment!");
-            commentRepository.save(new Comment(faker.number().randomDigit(), faker.number().numberBetween(100, 200), faker.number().randomDigit(), faker.lebowski().quote()));
+            commentPublisher.publish(comment);
+            //commentRepository.save(comment);
             //log.info("Added new comment!");
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -56,7 +62,7 @@ public class DataLoader {
         executor.scheduleAtFixedRate(
                 this::addNewComments,
                 0,
-                30,
+                5,
                 TimeUnit.SECONDS);
     }
 

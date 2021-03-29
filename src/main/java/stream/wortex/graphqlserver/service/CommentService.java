@@ -2,8 +2,10 @@ package stream.wortex.graphqlserver.service;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.coxautodev.graphql.tools.GraphQLSubscriptionResolver;
+import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stream.wortex.graphqlserver.CommentPublisher;
 import stream.wortex.graphqlserver.model.Comment;
 import stream.wortex.graphqlserver.repository.CommentRepository;
 
@@ -19,6 +21,13 @@ public class CommentService implements GraphQLQueryResolver, GraphQLSubscription
         return commentRepository.findAll();
     }
 
+    @Autowired
+    private CommentPublisher commentPublisher;
+
+
+    public Publisher<Comment> anyCommentAdded() {
+        return commentPublisher.getPublisher();
+    }
 
 
 
