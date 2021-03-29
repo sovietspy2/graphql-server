@@ -1,4 +1,4 @@
-package stream.wortex.graphqlserver;
+package stream.wortex.graphqlserver.error;
 
 import graphql.ErrorType;
 import graphql.GraphQLError;

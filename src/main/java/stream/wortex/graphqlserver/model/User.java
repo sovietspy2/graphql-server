@@ -1,4 +1,4 @@
-package stream.wortex.graphqlserver;
+package stream.wortex.graphqlserver.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

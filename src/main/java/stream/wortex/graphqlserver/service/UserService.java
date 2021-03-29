@@ -1,9 +1,11 @@
-package stream.wortex.graphqlserver;
+package stream.wortex.graphqlserver.service;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stream.wortex.graphqlserver.model.User;
+import stream.wortex.graphqlserver.repository.UserRepository;
 
 import java.util.Date;
 import java.util.List;

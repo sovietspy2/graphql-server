@@ -1,18 +1,32 @@
 schema {
     query: Query,
     mutation: Mutation,
+    #subscription: Subscription
 }
+#
+#type Subscription {
+#    #commentAdded(postId: ID!): Comment
+#    anyCommentAdded: Comment
+#}
 
 type Query{
     # Fetch All Users
     getAllUsers:[User],
     findUserByName(name:String): User
+    getAllComments: [Comment]
 }
 
 type Mutation {
     # Update the user address
     updateUserAddress(userId:Int,address:String): User
     createUser(firstName:String,lastName:String, dob:String, address:String, postId:Int): User
+}
+
+type Comment {
+    id: ID!,
+    userId: Int,
+    postId: Int,
+    text: String
 }
 
 type User {
